@@ -33,13 +33,13 @@ function Accordion({ questions }) {
   return (
     <div className="accordion">
       {questions.map((el, id) => (
-        <AccordionItem curOpen={curOpen} onOpen={setCurOpen} key={id} num={id} title={el.title} text={el.text} />
+        <AccordionItem curOpen={curOpen} onOpen={setCurOpen} key={id} num={id} title={el.title} >{el.text}</AccordionItem>
       ))}
     </div>
   );
 }
 
-function AccordionItem({ num, title, text,curOpen,onOpen }) {
+function AccordionItem({ num, title,curOpen,onOpen,children }) {
   const open = num===curOpen;
   const handleToggle = ()=>{
     onOpen(open? null: num)
@@ -50,7 +50,7 @@ function AccordionItem({ num, title, text,curOpen,onOpen }) {
       <p className={open?"number active":"number"}>{num<9?`0${num}`:`${num}`}</p>
       <p className={open?"title active":"title"}>{title}</p>
       <p className={open?"text active":"text"}>{open?'-':'+'}</p>
-      {open && (<div className="content">{text}</div>)}
+      {open && (<div className="content">{children}</div>)}
     </div>
   );
 }
